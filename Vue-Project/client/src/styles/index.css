@@ -1,0 +1,291 @@
+/* Main stylesheet - imports all other stylesheets */
+
+/* FontAwesome icons */
+@import '@fortawesome/fontawesome-free/css/all.css';
+
+/* Custom stylesheets */
+@import './base.css';
+@import './components.css';
+@import './layout.css';
+@import './utilities.css';
+
+/* Tailwind CSS */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Component-specific styles that need to be global */
+
+/* Vue transitions */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.slide-fade-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
+}
+
+.modal-enter-active,
+.modal-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.modal-enter-from,
+.modal-leave-to {
+  opacity: 0;
+}
+
+.modal-enter-active .modal-container,
+.modal-leave-active .modal-container {
+  transition: transform 0.3s ease;
+}
+
+.modal-enter-from .modal-container,
+.modal-leave-to .modal-container {
+  transform: scale(0.9);
+}
+
+/* Custom scrollbar for webkit browsers */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Loading overlay */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+/* Toast notifications positioning */
+.toast-container {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 400px;
+}
+
+@media (max-width: 640px) {
+  .toast-container {
+    left: 1rem;
+    right: 1rem;
+    max-width: none;
+  }
+}
+
+/* Tooltip styles */
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltip-text {
+  visibility: hidden;
+  width: 120px;
+  background-color: #374151;
+  color: white;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  font-size: 0.75rem;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip .tooltip-text::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #374151 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Form validation styles */
+.form-field-error input,
+.form-field-error textarea,
+.form-field-error select {
+  @apply border-red-300 focus:border-red-500 focus:ring-red-500;
+}
+
+.form-field-success input,
+.form-field-success textarea,
+.form-field-success select {
+  @apply border-green-300 focus:border-green-500 focus:ring-green-500;
+}
+
+/* Table responsive wrapper */
+.table-responsive {
+  @apply overflow-x-auto;
+}
+
+@media (max-width: 768px) {
+  .table-responsive table {
+    @apply text-sm;
+  }
+  
+  .table-responsive th,
+  .table-responsive td {
+    @apply px-3 py-2;
+  }
+}
+
+/* Card hover effects */
+.card-hover {
+  @apply transition-all duration-200 hover:shadow-lg hover:-translate-y-1;
+}
+
+/* Button loading state */
+.btn-loading {
+  @apply opacity-75 cursor-not-allowed;
+}
+
+.btn-loading::before {
+  content: '';
+  @apply inline-block w-4 h-4 mr-2 border-2 border-white border-t-transparent rounded-full animate-spin;
+}
+
+/* Image placeholder */
+.image-placeholder {
+  @apply bg-gray-200 flex items-center justify-center;
+}
+
+.image-placeholder::before {
+  content: '📷';
+  @apply text-gray-400 text-2xl;
+}
+
+/* Progress bar */
+.progress-bar {
+  @apply w-full bg-gray-200 rounded-full h-2;
+}
+
+.progress-fill {
+  @apply bg-indigo-600 h-2 rounded-full transition-all duration-300;
+}
+
+/* Divider with text */
+.divider-with-text {
+  @apply relative flex items-center my-6;
+}
+
+.divider-with-text::before {
+  content: '';
+  @apply flex-1 h-px bg-gray-300;
+}
+
+.divider-with-text span {
+  @apply px-4 text-sm text-gray-500 bg-white;
+}
+
+.divider-with-text::after {
+  content: '';
+  @apply flex-1 h-px bg-gray-300;
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 640px) {
+  /* Reduce font sizes on mobile */
+  .text-responsive-lg {
+    @apply text-lg;
+  }
+  
+  .text-responsive-xl {
+    @apply text-xl;
+  }
+  
+  .text-responsive-2xl {
+    @apply text-xl;
+  }
+  
+  .text-responsive-3xl {
+    @apply text-2xl;
+  }
+  
+  /* Adjust spacing on mobile */
+  .spacing-responsive {
+    @apply space-y-4;
+  }
+  
+  /* Make buttons full width on mobile */
+  .btn-responsive {
+    @apply w-full;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .btn {
+    @apply border-2 border-current;
+  }
+  
+  .card {
+    @apply border-2 border-gray-400;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
